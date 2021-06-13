@@ -1,0 +1,49 @@
+# This workflow will run all tests
+
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - '**'
+         
+jobs:
+  ci:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+     
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports: ['5432:5432']
+         
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0
+          bundler: default
+          bundler-cache: true
+
+      - name: Standardrb Check
+        run: bundle exec standardrb
+
+      - name: Brakeman Check
+        run: bundle exec brakeman
+
+      - name: Run tests
+        env:
+          DATABASE_URL: postgres://postgres:password@localhost:5432/test
+          RAILS_ENV: test
+          PG_USER: postgres
+        run: |
+          bundle exec rails db:test:prepare
+          bundle exec rspec gilded_rose_spec.rb 
