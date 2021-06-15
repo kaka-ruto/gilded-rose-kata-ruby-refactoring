@@ -219,5 +219,55 @@ describe GildedRose do
         expect(item).to have_attributes(sell_in: -11, quality: 0)
       end
     end
+
+    context "Conjured Items" do
+      it "before sell date" do
+        gilded_rose = GildedRose.new(name: "Conjured", sell_in: 5, quality: 10)
+
+        gilded_rose.update_quality
+
+        expect(gilded_rose).to have_attributes(sell_in: 4, quality: 8)
+      end
+
+      it "before sell date at zero quality" do
+        gilded_rose = GildedRose.new(name: "Conjured", sell_in: 5, quality: 0)
+
+        gilded_rose.update_quality
+
+        expect(gilded_rose).to have_attributes(sell_in: 4, quality: 0)
+      end
+
+      it "on sell date" do
+        gilded_rose = GildedRose.new(name: "Conjured", sell_in: 0, quality: 10)
+
+        gilded_rose.update_quality
+
+        expect(gilded_rose).to have_attributes(sell_in: -1, quality: 6)
+      end
+
+      it "on sell date at zero quality" do
+        gilded_rose = GildedRose.new(name: "Conjured", sell_in: 0, quality: 0)
+
+        gilded_rose.update_quality
+
+        expect(gilded_rose).to have_attributes(sell_in: -1, quality: 0)
+      end
+
+      it "after sell date" do
+        gilded_rose = GildedRose.new(name: "Conjured", sell_in: -10, quality: 10)
+
+        gilded_rose.update_quality
+
+        expect(gilded_rose).to have_attributes(sell_in: -11, quality: 6)
+      end
+
+      it "after sell date at zero quality" do
+        gilded_rose = GildedRose.new(name: "Conjured", sell_in: -10, quality: 0)
+
+        gilded_rose.update_quality
+
+        expect(gilded_rose).to have_attributes(sell_in: -11, quality: 0)
+      end
+    end
   end
 end
