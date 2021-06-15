@@ -1,62 +1,98 @@
 require 'pry'
 
-class GildedRose
-  attr_reader :name, :sell_in, :quality
-
-  def initialize(name:, sell_in:, quality:)
-    @name = name
-    @sell_in = sell_in
-    @quality = quality
+module GildedRose
+  def self.new(name:, sell_in:, quality:)
+    class_for(name).new(sell_in: sell_in, quality: quality)
   end
 
-  def update_quality
+  def self.class_for(name)
     case name
     when 'Aged Brie'
-      return update_brie
+      Brie
     when 'Sulfuras, Hand of Ragnaros'
-      return update_sulfuras
+      Sulfuras
     when 'Backstage passes to a TAFKAL80ETC concert'
-      return update_backstage
+      Backstage
     when 'Conjured'
-      return update_conjured
+      Conjured
     else
-      return update_normal
+      Normal
     end
   end
 
-  def update_brie
-    @sell_in -= 1
-    return if @quality >= 50
+  class Brie
+    attr_reader :sell_in, :quality
 
-    @quality += 1 
-    @quality += 1 if @sell_in <= 0 and @quality < 50
+    def initialize(sell_in:, quality:)
+      @sell_in, @quality = sell_in, quality
+    end
+     
+    def update_quality
+      @sell_in -= 1
+      return if @quality >= 50
+
+      @quality += 1 
+      @quality += 1 if @sell_in <= 0 and @quality < 50
+    end
   end
 
-  def update_normal
-    @sell_in -= 1
-    return if @quality == 0
+  class Normal
+    attr_reader :sell_in, :quality
 
-    @quality -= 1
-    @quality -= 1 if @sell_in <= 0
+    def initialize(sell_in:, quality:)
+      @sell_in, @quality = sell_in, quality
+    end
+     
+    def update_quality
+      @sell_in -= 1
+      return if @quality == 0
+
+      @quality -= 1
+      @quality -= 1 if @sell_in <= 0
+    end
   end
 
-  def update_sulfuras; end
+  class Sulfuras
+    attr_reader :sell_in, :quality
 
-  def update_backstage
-    @sell_in -= 1
-    return if quality >= 50
-    return @quality = 0 if @sell_in < 0
-
-    @quality += 1
-    @quality += 1 if @sell_in < 10
-    @quality += 1 if @sell_in < 5
+    def initialize(sell_in:, quality:)
+      @sell_in, @quality = sell_in, quality
+    end
+     
+    def update_quality; end
   end
 
-  def update_conjured
-    @sell_in -= 1
-    return if @quality == 0
+  class Backstage
+    attr_reader :sell_in, :quality
 
-    @quality -= 2
-    @quality -= 2 if @sell_in <= 0
+    def initialize(sell_in:, quality:)
+      @sell_in, @quality = sell_in, quality
+    end
+     
+    def update_quality
+      @sell_in -= 1
+      return if quality >= 50
+      return @quality = 0 if @sell_in < 0
+
+      @quality += 1
+      @quality += 1 if @sell_in < 10
+      @quality += 1 if @sell_in < 5
+    end
+  end
+
+  class Conjured
+    attr_reader :sell_in, :quality
+
+    def initialize(sell_in:, quality:)
+      @sell_in, @quality = sell_in, quality
+    end
+     
+    def update_quality
+      @sell_in -= 1
+      return if @quality == 0
+
+      @quality -= 2
+      @quality -= 2 if @sell_in <= 0
+    end
   end
 end
