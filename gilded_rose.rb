@@ -1,4 +1,4 @@
-require 'pry'
+require "pry"
 
 module GildedRose
   def self.new(name:, sell_in:, quality:)
@@ -7,13 +7,13 @@ module GildedRose
 
   def self.class_for(name)
     case name
-    when 'Aged Brie'
+    when "Aged Brie"
       Brie
-    when 'Sulfuras, Hand of Ragnaros'
+    when "Sulfuras, Hand of Ragnaros"
       Sulfuras
-    when 'Backstage passes to a TAFKAL80ETC concert'
+    when "Backstage passes to a TAFKAL80ETC concert"
       Backstage
-    when 'Conjured'
+    when "Conjured"
       Conjured
     else
       Normal
@@ -26,13 +26,13 @@ module GildedRose
     def initialize(sell_in:, quality:)
       @sell_in, @quality = sell_in, quality
     end
-     
+
     def update_quality
       @sell_in -= 1
       return if @quality >= 50
 
-      @quality += 1 
-      @quality += 1 if @sell_in <= 0 and @quality < 50
+      @quality += 1
+      @quality += 1 if (@sell_in <= 0) && (@quality < 50)
     end
   end
 
@@ -42,7 +42,7 @@ module GildedRose
     def initialize(sell_in:, quality:)
       @sell_in, @quality = sell_in, quality
     end
-     
+
     def update_quality
       @sell_in -= 1
       return if @quality == 0
@@ -58,8 +58,9 @@ module GildedRose
     def initialize(sell_in:, quality:)
       @sell_in, @quality = sell_in, quality
     end
-     
-    def update_quality; end
+
+    def update_quality
+    end
   end
 
   class Backstage
@@ -68,7 +69,7 @@ module GildedRose
     def initialize(sell_in:, quality:)
       @sell_in, @quality = sell_in, quality
     end
-     
+
     def update_quality
       @sell_in -= 1
       return if quality >= 50
@@ -86,7 +87,7 @@ module GildedRose
     def initialize(sell_in:, quality:)
       @sell_in, @quality = sell_in, quality
     end
-     
+
     def update_quality
       @sell_in -= 1
       return if @quality == 0

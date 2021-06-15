@@ -1,19 +1,19 @@
-require 'simplecov'
+require "simplecov"
 SimpleCov.start
-require File.join(File.dirname(__FILE__), 'gilded_rose')
+require File.join(File.dirname(__FILE__), "gilded_rose")
 
 describe GildedRose do
-  describe '#update_quality' do
+  describe "#update_quality" do
     context 'when the item is "normal"' do
-      it 'before sell date' do
-        item = GildedRose.new(name: 'foo', sell_in: 10, quality: 5)
+      it "before sell date" do
+        item = GildedRose.new(name: "foo", sell_in: 10, quality: 5)
 
         item.update_quality
 
         expect(item).to have_attributes(sell_in: 9, quality: 4)
       end
 
-      it 'on sell date' do
+      it "on sell date" do
         item = GildedRose.new(name: "Normal", sell_in: 0, quality: 10)
 
         item.update_quality
