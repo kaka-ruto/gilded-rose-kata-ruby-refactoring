@@ -28,8 +28,8 @@ jobs:
           bundler: default
           bundler-cache: true
 
-      # - name: Standardrb Check
-      #   run: bundle exec standardrb
+      - name: Standardrb Check
+        run: bundle exec standardrb
 
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5

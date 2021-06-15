@@ -13,7 +13,7 @@ module GildedRose
       Sulfuras
     when "Backstage passes to a TAFKAL80ETC concert"
       Backstage
-    when "Conjured"
+    when "Conjured Mana Cake"
       Conjured
     else
       Normal

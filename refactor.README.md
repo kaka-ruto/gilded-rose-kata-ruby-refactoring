@@ -25,5 +25,5 @@ In the end, this were the results
 - No code smells
 - No method/class with a cognitive complexity greater than 5
 - No method with more than 25 LOC
-- No lintinues
+- No linting issues
 - Technical debt at class C. Majorly because there are still some duplication in the GildedRose module and on the tests, an item to improve on.

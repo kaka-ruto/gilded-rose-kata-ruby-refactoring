@@ -220,9 +220,9 @@ describe GildedRose do
       end
     end
 
-    context "Conjured Items" do
+    context "Conjured Mana Cake Items" do
       it "before sell date" do
-        gilded_rose = GildedRose.new(name: "Conjured", sell_in: 5, quality: 10)
+        gilded_rose = GildedRose.new(name: "Conjured Mana Cake", sell_in: 5, quality: 10)
 
         gilded_rose.update_quality
 
@@ -230,7 +230,7 @@ describe GildedRose do
       end
 
       it "before sell date at zero quality" do
-        gilded_rose = GildedRose.new(name: "Conjured", sell_in: 5, quality: 0)
+        gilded_rose = GildedRose.new(name: "Conjured Mana Cake", sell_in: 5, quality: 0)
 
         gilded_rose.update_quality
 
@@ -238,7 +238,7 @@ describe GildedRose do
       end
 
       it "on sell date" do
-        gilded_rose = GildedRose.new(name: "Conjured", sell_in: 0, quality: 10)
+        gilded_rose = GildedRose.new(name: "Conjured Mana Cake", sell_in: 0, quality: 10)
 
         gilded_rose.update_quality
 
@@ -246,7 +246,7 @@ describe GildedRose do
       end
 
       it "on sell date at zero quality" do
-        gilded_rose = GildedRose.new(name: "Conjured", sell_in: 0, quality: 0)
+        gilded_rose = GildedRose.new(name: "Conjured Mana Cake", sell_in: 0, quality: 0)
 
         gilded_rose.update_quality
 
@@ -254,7 +254,7 @@ describe GildedRose do
       end
 
       it "after sell date" do
-        gilded_rose = GildedRose.new(name: "Conjured", sell_in: -10, quality: 10)
+        gilded_rose = GildedRose.new(name: "Conjured Mana Cake", sell_in: -10, quality: 10)
 
         gilded_rose.update_quality
 
@@ -262,7 +262,7 @@ describe GildedRose do
       end
 
       it "after sell date at zero quality" do
-        gilded_rose = GildedRose.new(name: "Conjured", sell_in: -10, quality: 0)
+        gilded_rose = GildedRose.new(name: "Conjured Mana Cake", sell_in: -10, quality: 0)
 
         gilded_rose.update_quality
 
