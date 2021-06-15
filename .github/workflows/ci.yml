@@ -9,6 +9,9 @@ on:
   push:
     branches:
       - '**'
+
+env:
+  CODE_CLIMATE_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
          
 jobs:
   ci:
@@ -47,3 +50,8 @@ jobs:
         run: |
           bundle exec rails db:test:prepare
           bundle exec rspec gilded_rose_spec.rb 
+
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{ env.CODE_CLIMATE_REPORTER_ID }}
