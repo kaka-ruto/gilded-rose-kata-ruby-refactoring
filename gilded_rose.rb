@@ -13,6 +13,8 @@ class GildedRose
     case name
     when 'Aged Brie'
       return update_brie
+    when 'Sulfuras, Hand of Ragnaros'
+      return update_sulfuras
     else
       return update_normal
     end
@@ -78,4 +80,6 @@ class GildedRose
     @quality -= 1
     @quality -= 1 if @sell_in <= 0
   end
+
+  def update_sulfuras; end
 end
